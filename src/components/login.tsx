@@ -51,19 +51,6 @@ const Login = () => {
     return;
   };
 
-  // ---------------------------------
-  // Debugging
-  //
-  const getLocalStorage = () => {
-    const getUser = localStorage.getItem("users");
-    console.log(getUser);
-    const obj = JSON.parse(localStorage.getItem('users') || '{}');
-    console.log("here's the parsed object:");
-    console.log(obj);
-    console.log(obj.email);
-  }
-  // ---------------------------------
-
   return (
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
@@ -118,16 +105,6 @@ const Login = () => {
             >
               Sign In
             </Button>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={getLocalStorage}
-            >
-              get local storage
-            </Button>
-
             <Grid container>
               <Grid item>
                 <Link component={ RouterLink } to="/signup" variant="body2">

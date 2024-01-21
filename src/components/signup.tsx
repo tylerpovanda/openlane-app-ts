@@ -120,19 +120,6 @@ const SignUp = () => {
     // Redirect to Login Screen
     navigate('/');
   };
-  
-  // ------------------------
-  // Debugging
-  // 
-  const getLocalStorage = () => {
-    const getUser = localStorage.getItem("users");
-    console.log(getUser);
-  }
-  const clearLocalStorage = () => {
-    localStorage.setItem('users', '[]');
-    console.log(localStorage.getItem('users')); 
-  }
-  // ------------------------
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -245,24 +232,6 @@ const SignUp = () => {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign Up
-            </Button>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={getLocalStorage}
-            >
-              get local storage
-            </Button>
-            <Button
-              type="button"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={clearLocalStorage}
-            >
-              clear local storage
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
