@@ -1,15 +1,14 @@
 I built this as a personal coding challenging to create an single page client-side wep app using React and TypeScript. All data is stored in local storage with no use of any database or API endpoints. I'm not concerned with security for this project.
 
-To run this on your local machine, you'll need to have npm installed on your machine.
+To run this on your local machine, you'll need to utilze Node Package Manager to install the depdencies.
 
-To first install the depdencies, run:
+Once you have npm, run:
 
-npm install
+``$ npm install``
 
 Once installed, run the following to start the app in your browser"
 
-npm start
-
+``$ npm start``
 
 This app serves as a basic means of creating and managing user profiles. The main functionalities are to create, login, view, edit and delete a profile and it's user information. 
 
