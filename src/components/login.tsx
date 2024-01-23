@@ -23,23 +23,21 @@ const Login = () => {
   const [invalidEmail, setInvalidEmail] = useState(false)
   const navigate = useNavigate();
 
-  const objLoad = JSON.parse(localStorage.getItem('users') || '[]'); // Load list of users
+  const userList = JSON.parse(localStorage.getItem('users') || '[]'); // Load list of users
   var currentUser = undefined; // Declare variable for currentUser
   
   // Handle form submission for login
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
 
     // Check if User exists, and check if username and password match
-    for (let i = 0; i < objLoad.length; i++) {
-      console.log(objLoad[i].email);
-
+    for (let i = 0; i < userList.length; i++) {
       // If user exists and credentials match, navigate
       // to view profile and pass user information
-      if(data.get('email') === objLoad[i].email &&
-          data.get('password') === objLoad[i].password) { 
-        currentUser = objLoad[i];
+      if(data.get('email') === userList[i].email &&
+          data.get('password') === userList[i].password) { 
+        currentUser = userList[i];
         const userState = JSON.stringify(currentUser);
         navigate('/profile', { state: { user: userState } });
       } 

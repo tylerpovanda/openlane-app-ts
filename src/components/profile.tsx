@@ -30,36 +30,36 @@ const style = {
 const Profile = () => {
   // State for modal
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleOpen = (): void => setOpen(true);
+  const handleClose = (): void => setOpen(false);
   
   // Get location state from Login Screen
   const location = useLocation();
-  const obj = JSON.parse(location.state.user); // Get object from locationState string
-  const objLoad = JSON.parse(localStorage.getItem("users") || '[]'); // Get object from list of users in local storage
+  const currentUser = JSON.parse(location.state.user); // Get object from locationState string
+  const userList = JSON.parse(localStorage.getItem("users") || '[]'); // Get object from list of users in local storage
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (): void => {
     navigate('/');
   }
 
-  const handleDelete = () => {
+  const handleDelete = (): void => {
     // Iterate through array to delete current user from user array
-    for (let i = 0; i < objLoad.length; i++) {
-      if(obj.email === objLoad[i].email) { 
-        objLoad.splice(i, 1);
-        localStorage.setItem('users', JSON.stringify(objLoad)); // Store new list of users after delete
+    for (let i = 0; i < userList.length; i++) {
+      if(currentUser.email === userList[i].email) { 
+        userList.splice(i, 1);
+        localStorage.setItem('users', JSON.stringify(userList)); // Store new list of users after delete
       }
     };
     handleLogout();
   };
 
-  const handleEdit = () => {
+  const handleEdit = (): void => {
     // Get index to send with navigation
     let index = 0;
     let emailFound:boolean = false;
-    for (let i = 0; i < objLoad.length; i++) {
-      if(obj.email === objLoad[i].email) { 
+    for (let i = 0; i < userList.length; i++) {
+      if(currentUser.email === userList[i].email) { 
         index = i;
         emailFound = true;
       } 
@@ -69,7 +69,7 @@ const Profile = () => {
       return;
     }
     // Proceed to edit profile, passing index of the current user in user list
-    navigate('/editprofile', { state: { user: JSON.stringify(obj), index: index } }); 
+    navigate('/editprofile', { state: { user: JSON.stringify(currentUser), index: index } }); 
   };
 
   // ------------------------------
@@ -83,11 +83,11 @@ const Profile = () => {
   }
   
   const rows = [
-    createData('Full Name', obj.fullName),
-    createData('Email', obj.email),
-    createData('Password', obj.password),
-    createData('Phone Number', obj.phoneNumber),
-    createData('Favorite Color', obj.favoriteColor)
+    createData('Full Name', currentUser.fullName),
+    createData('Email', currentUser.email),
+    createData('Password', currentUser.password),
+    createData('Phone Number', currentUser.phoneNumber),
+    createData('Favorite Color', currentUser.favoriteColor)
   ];
   // ------------------------------
   
@@ -104,8 +104,8 @@ const Profile = () => {
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <AccountCircleIcon />
           </Avatar>
-          <Typography component="h1" variant="h5" style={{color: obj.favoriteColor}}>
-            {obj.fullName}'s Profile
+          <Typography component="h1" variant="h5" style={{color: currentUser.favoriteColor}}>
+            {currentUser.fullName}'s Profile
           </Typography>
 
           <center>

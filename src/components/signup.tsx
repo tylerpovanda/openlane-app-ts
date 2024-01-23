@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -24,7 +24,7 @@ const SignUp = () => {
   const [validPassword, setValidPassword] = useState(false);
   const [missingRequiredFields, setMissingRequiredFields] = useState(false);
 
-  const handleChange = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent): void => {
     setFavCol(event.target.value as string);
   };
 
@@ -33,7 +33,7 @@ const SignUp = () => {
   const navigate = useNavigate();
 
   const validateEmail = (event:any) => {
-    if(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)){
+    if(/^\w+([-]?\w+)*@\w+([-]?\w+)*(\.\w{2,3})+$/.test(event.target.value)){
       setValidEmail(false);
     } else {
       setValidEmail(true);
@@ -91,32 +91,31 @@ const SignUp = () => {
     // If all required fields are present:
     setMissingRequiredFields(false);
     // De-String User List
-    const oldUsersObj = JSON.parse(localStorage.getItem('users') || '[]');
+    const userList = JSON.parse(localStorage.getItem('users') || '[]');
 
     // If User Array is empty
-    if(oldUsersObj.length === 0) {
+    if(userList.length === 0) {
       // Push new User to User List
-      oldUsersObj.push(newUser);
+      userList.push(newUser);
       // Stringify New User List
-      localStorage.setItem('users', JSON.stringify(oldUsersObj));  
+      localStorage.setItem('users', JSON.stringify(userList));  
       // Redirect to Login Screen
       navigate('/'); 
       return;
     }
 
     // Check if email has already been used
-    for (let i = 0; i < oldUsersObj.length; i++) {
-      if(newUser.email === oldUsersObj[i].email) { 
-        console.log("Email is already in use!");
+    for (let i = 0; i < userList.length; i++) {
+      if(newUser.email === userList[i].email) { 
         setInvalidEmail(true);
         return;
       } 
     };
 
     // If it hasn't been used, then the user can sign up
-    oldUsersObj.push(newUser); // Push new User to User List
+    userList.push(newUser); // Push new User to User List
     // Stringify New User List
-    localStorage.setItem('users', JSON.stringify(oldUsersObj));  
+    localStorage.setItem('users', JSON.stringify(userList));  
     // Redirect to Login Screen
     navigate('/');
   };
